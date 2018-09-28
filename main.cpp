@@ -5,12 +5,19 @@
 
 using namespace std;
 
-Monster monster1("Wolf");
-Monster monster2("Kobold");
-
 int main()
 {
-	
+	Item sword("Sword", 150);
+	Item axe("Axe", 150);
+	int choice;
+
+	cout << "Add a sword: 1\nAdd an axe: 2" << endl;
+	cout << "Your Choice: ";
+	cin >> choice;
+	cout << "\nSuccess!";
+
+
+
 
 
 	//Exit success.
