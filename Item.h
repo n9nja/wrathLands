@@ -12,12 +12,12 @@ public:
 	void remove();
 
 	//Getters
-	string getName() { return _name; }
-	int getValue() { return _value; }
-	int getCount() { return _count; }
+	string getName() { return _name; };
+	int getValue() { return _value; };
+	int getCount() { return _count; };
 
 	//Setters
-	void setCount(int count) { _count = count };
+	void setCount(int count) { _count = count; };
 
 private:
 	string _name;

@@ -14,9 +14,20 @@ int main()
 	cout << "Add a sword: 1\nAdd an axe: 2" << endl;
 	cout << "Your Choice: ";
 	cin >> choice;
-	cout << "\nSuccess!";
+	cout << "\nSuccess!\n";
 
+	if (choice = 1)
+	{
+		sword.add();
+	}
 
+	else if (choice = 2)
+	{
+		axe.add();
+	}
+
+	cout << "Sword: " << sword.getCount() << endl;
+	cout << "Axe: " << axe.getCount() << endl;
 
 
 
