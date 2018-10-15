@@ -49,5 +49,8 @@
     <None Include="level1.wl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="level2.wl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -60,11 +60,11 @@ void Level::load(string fileName, Player &player)
 				player.setPosition(j, i);
 				break;
 			case 'S': //Snake
-				_enemies.push_back(Enemy("Snake", tile, 1000000, 3, 1, 10, 10));
+				_enemies.push_back(Enemy("Snake", tile, 1000000, 3, 1, 10, 50));
 				_enemies.back().setPosition(j, i);
 				break;
 			case 'g':
-				_enemies.push_back(Enemy("Snake", tile, 2, 7, 4, 30, 50));
+				_enemies.push_back(Enemy("Goblin", tile, 2, 7, 4, 30, 150));
 				_enemies.back().setPosition(j, i);
 				break;
 			case 'D':

@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="level1.wl" />
+    <None Include="level2.wl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
