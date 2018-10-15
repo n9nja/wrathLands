@@ -37,10 +37,24 @@ void Level::load(string fileName, Player &player)
 			tile = _levelData[i][j];
 
 			switch (tile) {
-			case '@':
+			case '@': //Player
 				player.setPosition(j, i);
-				printf("Player position set to ");
-				std::cout << j << ' ' << i << endl;
+				break;
+			case 'S': //Snake
+				_enemies.push_back(Enemy("Snake", tile, 1000000, 3, 1, 10, 10));
+				_enemies.back().setPosition(j, i);
+				break;
+			case 'g':
+				_enemies.push_back(Enemy("Snake", tile, 2, 7, 4, 30, 50));
+				_enemies.back().setPosition(j, i);
+				break;
+			case 'D':
+				_enemies.push_back(Enemy("Dragon", tile, 7, 12, 10, 100, 1000));
+				_enemies.back().setPosition(j, i);
+				break;
+			case 'A':
+				_enemies.push_back(Enemy("Assassin", tile, 3, 9, 7, 80, 100));
+				_enemies.back().setPosition(j, i);
 				break;
 			}
 		}
@@ -116,8 +130,59 @@ void Level::processMove(Player &player, int targetX, int targetY)
 		setTile(targetX, targetY, '@');
 		break;
 	case '#':
-		printf("You ran into a wall!\n");
-		system("PAUSE");
 		break;
+	default:
+		battleMonster(player, targetX, targetY);
+		break;
+	}
+}
+
+void Level::battleMonster(Player &player, int targetX, int targetY)
+{
+	int enemyX;
+	int enemyY;
+	int attackRoll;
+	int attackResult;
+	string enemyName;
+
+	for (int i = 0; i < _enemies.size(); i++) {
+		_enemies[i].getPosition(enemyX, enemyY);
+		enemyName = _enemies[i].getName();
+
+		if (targetX == enemyX && targetY == enemyY) {
+			//Battle!
+			attackRoll = player.attack();
+
+			printf("Player attacked %s with a roll of %d", enemyName.c_str(), attackRoll);
+
+			attackResult = _enemies[i].takeDamage(attackRoll);
+			if (attackResult != 0) {
+				setTile(targetX, targetY, '.');
+				print();
+				printf("Monster died!\n");
+				player.addExperience(attackResult);
+				system("PAUSE");
+
+				return;
+			}
+			//Monster turn
+			attackRoll = _enemies[i].attack();
+
+			printf("%s attacked Player with a roll of %d", enemyName.c_str(), attackRoll);
+
+			attackResult = player.takeDamage(attackRoll);
+
+			if (attackResult != 0) {
+				setTile(targetX, targetY, 'x');
+				print();
+				printf("YOU DEAD\n");
+				system("PAUSE");
+
+				exit(0);
+			}
+
+
+			return;
+		}
 	}
 }

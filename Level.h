@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Player.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ public:
 
 private:
 	vector <string> _levelData;
+	vector <Enemy> _enemies;
 
 	void processMove(Player &player, int targetX, int targetY);
+	void battleMonster(Player &player, int targetX, int targetY);
 };
