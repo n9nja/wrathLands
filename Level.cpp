@@ -1,11 +1,3 @@
-#include "Level.h"
-#include <fstream>
-#include <iostream>
-#include <cstdio>
-
-using namespace std;
-
-
 /*
 
 Wrath Lands - An ASCII Adventure Game
@@ -25,6 +17,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+
+#include "Level.h"
+#include <fstream>
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
 
 Level::Level()
 {

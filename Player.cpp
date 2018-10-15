@@ -1,9 +1,3 @@
-#include "Player.h"
-#include <random>
-#include <ctime>
-
-using namespace std;
-
 /*
 
 Wrath Lands - An ASCII Adventure Game
@@ -23,6 +17,14 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+
+#include "Player.h"
+#include <random>
+#include <ctime>
+
+using namespace std;
+
+
 
 Player::Player()
 {

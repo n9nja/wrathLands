@@ -1,7 +1,3 @@
-#include "GameSystem.h"
-#include <iostream>
-#include <conio.h>
-
 /*
 
 Wrath Lands - An ASCII Adventure Game
@@ -21,6 +17,12 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+
+#include "GameSystem.h"
+#include <iostream>
+#include <conio.h>
+
+
 
 //Constructor sets up the game
 GameSystem::GameSystem(string levelFile)

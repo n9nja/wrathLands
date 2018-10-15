@@ -1,12 +1,3 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <conio.h>
-
-#include "GameSystem.h"
-
-using namespace std;
-
 /*
 
 Wrath Lands - An ASCII Adventure Game
@@ -26,6 +17,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
+
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <conio.h>
+
+#include "GameSystem.h"
+
+using namespace std;
+
+
 
 int main()
 {
