@@ -41,7 +41,7 @@ void Level::load(string fileName, Player &player)
 	}
 
 	string line;
-
+	//Builds the level from the file and pushes it back to the internal vector.
 	while (getline(file, line)) {
 		_levelData.push_back(line);
 	}
@@ -80,8 +80,7 @@ void Level::load(string fileName, Player &player)
 	}
 }
 
-void Level::print()
-{
+void Level::print() {
 
 	std::cout << string(100, '\n');
 	for (int i = 0; i < _levelData.size(); i++) {
@@ -90,8 +89,7 @@ void Level::print()
 	printf("\n");
 }
 
-void Level::movePlayer(char input, Player &player)
-{
+void Level::movePlayer(char input, Player &player) {
 
 	int playerX;
 	int playerY;
@@ -122,6 +120,36 @@ void Level::movePlayer(char input, Player &player)
 	default:
 		printf("INVALID INPUT!\n");
 		break;
+	}
+}
+
+void Level::updateEnemies(Player &player) {
+	char aiMove;
+	int playerX;
+	int playerY;
+	int enemyX;
+	int enemyY;
+
+
+	player.getPosition(playerX, playerY);
+
+	for (int i = 0; i < _enemies.size(); i++) {
+		aiMove = _enemies[i].getMove(playerX, playerY);
+		_enemies[i].getPosition(enemyX, enemyY);
+		switch (aiMove) {
+		case 'w':  //Up
+			enemyMove(player, i, enemyX, enemyY - 1);
+			break;
+		case 's':  //Down
+			enemyMove(player, i, enemyX, enemyY + 1);
+			break;
+		case 'a':  //Left
+			enemyMove(player, i, enemyX - 1, enemyY);
+			break;
+		case 'd':  //Right
+			enemyMove(player, i, enemyX + 1, enemyY);
+			break;
+		}
 	}
 }
 
@@ -157,6 +185,33 @@ void Level::processMove(Player &player, int targetX, int targetY)
 	}
 }
 
+void Level::enemyMove(Player &player, int enemyIndex, int targetX, int targetY) {
+	int playerX;
+	int playerY;
+	int enemyX;
+	int enemyY;
+
+	_enemies[enemyIndex].getPosition(enemyX, enemyY);
+	player.getPosition(playerX, playerY);
+
+	char  moveTile = getTile(targetX, targetY);
+
+	switch (moveTile) {
+	case '.':
+		_enemies[enemyIndex].setPosition(targetX, targetY);
+		setTile(enemyX, enemyY, '.');
+		setTile(targetX, targetY, _enemies[enemyIndex].getTile());
+		break;
+	case '#':
+		break;
+	case '@':
+		battleMonster(player, enemyX, enemyY);
+		break;
+	default:
+		break;
+	}
+}
+
 void Level::battleMonster(Player &player, int targetX, int targetY)
 {
 	int enemyX;
@@ -184,6 +239,11 @@ void Level::battleMonster(Player &player, int targetX, int targetY)
 				setTile(targetX, targetY, '.');
 				print();
 				printf("Monster died!\n");
+
+				_enemies[i] = _enemies.back();
+				_enemies.pop_back();
+				i--;
+
 				player.addExperience(attackResult);
 				system("PAUSE");
 

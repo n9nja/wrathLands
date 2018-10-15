@@ -11,11 +11,12 @@ class Level
 {
 public:
 	Level();
-
+	//Load and print the level
 	void load(string fileName, Player &player);
 	void print();
-
+	//Movement stuff
 	void movePlayer(char input, Player &player);
+	void updateEnemies(Player &player);
 
 	//Getters
 	char getTile(int x, int y);
@@ -28,5 +29,6 @@ private:
 	vector <Enemy> _enemies;
 
 	void processMove(Player &player, int targetX, int targetY);
+	void enemyMove(Player &player, int enemyIndex, int targetX, int targetY);
 	void battleMonster(Player &player, int targetX, int targetY);
 };
