@@ -22,16 +22,22 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <string>
 #include <conio.h>
-
+#include <random>
+#include <ctime>
+#include <string>
 #include "GameSystem.h"
 
 using namespace std;
 
+static default_random_engine levelEngine(time(0));
+uniform_int_distribution<int> level(1, 2);
 
 
 int main()
 {
-	GameSystem gameSystem("level1.wl");
+	int lvlNum = level(levelEngine);
+	string levelName = "level" + to_string(lvlNum) + ".wl";
+	GameSystem gameSystem(levelName);
 	gameSystem.playGame();
 
 	return 0;

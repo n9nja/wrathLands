@@ -49,7 +49,7 @@ void GameSystem::playGame() {
 //Movement
 void GameSystem::playerMove() {
 	char input;
-	printf("Move with WASD: ");
+	printf("Move with WASD. K to quit.\n");
 	input = _getch();
 
 	_level.movePlayer(input, _player);

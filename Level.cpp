@@ -115,8 +115,9 @@ void Level::movePlayer(char input, Player &player)
 	case 'D':
 		processMove(player, playerX + 1, playerY);
 		break;
-	case 'k':
+	case 'k': //Quit
 	case 'K':
+		exit(0);
 		break;
 	default:
 		printf("INVALID INPUT!\n");
@@ -160,9 +161,13 @@ void Level::battleMonster(Player &player, int targetX, int targetY)
 {
 	int enemyX;
 	int enemyY;
+	int playerX;
+	int playerY;
 	int attackRoll;
 	int attackResult;
 	string enemyName;
+
+	player.getPosition(playerX, playerY);
 
 	for (int i = 0; i < _enemies.size(); i++) {
 		_enemies[i].getPosition(enemyX, enemyY);
@@ -172,7 +177,7 @@ void Level::battleMonster(Player &player, int targetX, int targetY)
 			//Battle!
 			attackRoll = player.attack();
 
-			printf("Player attacked %s with a roll of %d", enemyName.c_str(), attackRoll);
+			printf("Player attacked %s with a roll of %d\n", enemyName.c_str(), attackRoll);
 
 			attackResult = _enemies[i].takeDamage(attackRoll);
 			if (attackResult != 0) {
@@ -187,12 +192,12 @@ void Level::battleMonster(Player &player, int targetX, int targetY)
 			//Monster turn
 			attackRoll = _enemies[i].attack();
 
-			printf("%s attacked Player with a roll of %d", enemyName.c_str(), attackRoll);
+			printf("%s attacked Player with a roll of %d\n", enemyName.c_str(), attackRoll);
 
 			attackResult = player.takeDamage(attackRoll);
 
 			if (attackResult != 0) {
-				setTile(targetX, targetY, 'x');
+				setTile(playerX, playerY, 'x');
 				print();
 				printf("YOU DEAD\n");
 				system("PAUSE");
@@ -200,7 +205,7 @@ void Level::battleMonster(Player &player, int targetX, int targetY)
 				exit(0);
 			}
 
-
+			system("PAUSE");
 			return;
 		}
 	}
